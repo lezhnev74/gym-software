@@ -1,19 +1,24 @@
 {
-    "name": "lezhnev74/gym-software",
-    "description": "Gym is a domain to design an App with DDD approach",
-    "type": "project",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Dmitriy Lezhnev",
-            "email": "lezhnev.work@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {},
-    "autoload": {
-        "psr-4": {
-            "Lezhnev74\\GymSoftware\\": "src/"
-        }
+  "name": "lezhnev74/gym-software",
+  "description": "Gym is a domain to design an App with DDD approach",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dmitriy Lezhnev",
+      "email": "lezhnev.work@gmail.com"
     }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "nesbot/carbon": "^1.21"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Lezhnev74\\GymSoftware\\": "src/"
+    }
+  }
 }

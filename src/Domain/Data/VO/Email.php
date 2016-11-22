@@ -11,6 +11,7 @@ class Email
 
     function __construct(string $email)
     {
+
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new InvalidData("E-mail is considered invalid");
         }
@@ -22,4 +23,5 @@ class Email
     {
         return $this->email;
     }
+
 }

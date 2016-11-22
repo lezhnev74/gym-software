@@ -17,6 +17,9 @@ class Client
         if (!strlen($last_name)) {
             throw new InvalidData("Last name must not be empty");
         }
+        if (strlen($phone) && !preg_match("#^\d{11}$#", $phone)) {
+            throw new InvalidData("Phone must be exactly 11 numbers");
+        }
 
         $this->first_name = $first_name;
         $this->last_name = $last_name;
@@ -36,7 +39,7 @@ class Client
 
     function getLastName()
     {
-        return $this->getLastName();
+        return $this->last_name;
     }
 
     function getPhone()
