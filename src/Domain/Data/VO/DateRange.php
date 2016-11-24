@@ -56,4 +56,16 @@ class DateRange
             $date->getDate()->gte($this->getBeginDate()->getDate());
     }
 
+    /**
+     * @param DateRange $dateRange
+     * @return bool
+     */
+    public function isIntersectsWith(DateRange $dateRange)
+    {
+        return
+            $dateRange->getBeginDate()->getDate()->lte($this->getEndDate()->getDate())
+            &&
+            $dateRange->getEndDate()->getDate()->gte($this->getBeginDate()->getDate());
+    }
+
 }

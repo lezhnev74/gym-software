@@ -40,4 +40,34 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($vo->isInRange($not_in_range_date));
 
     }
+
+    function test_range_intersection_detected()
+    {
+        $range1 = new DateRange(
+            new Date(Carbon::now()->subWeek()),
+            new Date(Carbon::now())
+        );
+        $range2 = new DateRange(
+            new Date(Carbon::now()->subDay()),
+            new Date(Carbon::now()->addDay())
+        );
+        $range3 = new DateRange(
+            new Date(Carbon::now()),
+            new Date(Carbon::now()->addWeek())
+        );
+        $range4 = new DateRange(
+            new Date(Carbon::now()->subYear()),
+            new Date(Carbon::now()->subMonth())
+        );
+        $range5 = new DateRange(
+            new Date(Carbon::now()->addDay()),
+            new Date(Carbon::now()->addMonth())
+        );
+
+        $this->assertTrue($range1->isIntersectsWith($range2));
+        $this->assertTrue($range1->isIntersectsWith($range3));
+        $this->assertFalse($range1->isIntersectsWith($range4));
+        $this->assertFalse($range1->isIntersectsWith($range5));
+
+    }
 }
