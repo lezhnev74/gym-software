@@ -22,14 +22,19 @@ class Report
 
     public function getTotalSessions()
     {
-        // TODO calculate sum of all sessions in all rooms
+        //
         // iterate over all rooms and get it's training sessions for the same date range
+        //
         $sessions = [];
         foreach ($this->getRooms() as $room) {
             foreach ($room->getTrainingSessions() as $session) {
-
+                if ($session->getDateRange()->isInRange($this->getDateRange())) {
+                    $sessions[] = $session;
+                }
             }
         }
+
+        return $sessions;
     }
 
     public function getRooms()

@@ -1,6 +1,9 @@
 <?php
 namespace Lezhnev74\GymSoftware\Domain\Data\Room;
 
+use Carbon\Carbon;
+use Lezhnev74\GymSoftware\Domain\Data\Room\Exception\RoomIsOvercrowded;
+use Lezhnev74\GymSoftware\Domain\Data\VO\Date;
 use Lezhnev74\GymSoftware\Domain\Data\VO\TrainingSession;
 
 class Room
@@ -13,9 +16,40 @@ class Room
     public function __construct($id, $code, $capacity, array $training_sessions)
     {
         $this->id = $id;
-        $this->training_sessions = $training_sessions;
         $this->code = $code;
         $this->capacity = $capacity;
+
+        foreach ($training_sessions as $session) {
+            $this->conductTrainingSession($session);
+        }
+    }
+
+    /**
+     * Get session that is being conducted at this moment
+     *
+     * @return mixed
+     */
+    public function getCurrentSessions()
+    {
+        $date = new Date(Carbon::now());
+        $current_sessions = [];
+        foreach ($this->getTrainingSessions() as $session) {
+            if ($session->getDataRange()->isInRange($date)) {
+                $current_sessions[] = $session;
+            }
+        }
+
+        return $current_sessions;
+    }
+
+    public function conductTrainingSession(TrainingSession $session)
+    {
+        // protect room from being overcrowded
+        if ($this->capacity == count($this->getTrainingSessions())) {
+            throw new RoomIsOvercrowded();
+        }
+
+        $this->training_sessions[] = $session;
     }
 
     /**
@@ -48,11 +82,6 @@ class Room
     public function getCapacity()
     {
         return $this->capacity;
-    }
-
-    public function conductTrainingSession(TrainingSession $session)
-    {
-        $this->training_sessions[] = $session;
     }
 
 
