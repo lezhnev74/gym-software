@@ -11,7 +11,8 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "nesbot/carbon": "^1.21"
+    "nesbot/carbon": "^1.21",
+    "fzaninotto/faker": "^1.6"
   },
   "require-dev": {
     "phpunit/phpunit": "5.5.*"

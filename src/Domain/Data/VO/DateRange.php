@@ -68,4 +68,18 @@ class DateRange
             $dateRange->getEndDate()->getDate()->gte($this->getBeginDate()->getDate());
     }
 
+    /**
+     * Calculate how many hours this range takes
+     *
+     * @return float
+     */
+    public function getHours()
+    {
+        $minutes = $this->getEndDate()->getDate()->diffInMinutes($this->getBeginDate()->getDate());
+        if (!$minutes) {
+            return 0.0;
+        }
+        return round($minutes / 60, 1);
+    }
+
 }

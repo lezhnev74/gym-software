@@ -28,7 +28,7 @@ class Report
         $sessions = [];
         foreach ($this->getRooms() as $room) {
             foreach ($room->getTrainingSessions() as $session) {
-                if ($session->getDateRange()->isInRange($this->getDateRange())) {
+                if ($session->getDateRange()->isIntersectsWith($this->getDateRange())) {
                     $sessions[] = $session;
                 }
             }
@@ -45,5 +45,10 @@ class Report
     public function getDateRange()
     {
         return $this->date_range;
+    }
+
+    public function getRoomPerformance()
+    {
+
     }
 }

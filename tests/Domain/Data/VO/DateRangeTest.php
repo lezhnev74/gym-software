@@ -70,4 +70,15 @@ class DateRangeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($range1->isIntersectsWith($range5));
 
     }
+
+    function test_range_calculates_hours()
+    {
+        $range1 = new DateRange(
+            new Date(Carbon::parse("01.01.2001 00:10")),
+            new Date(Carbon::parse("01.01.2001 01:50")),
+            new Date(Carbon::now())
+        );
+
+        $this->assertEquals(1.7, $range1->getHours());
+    }
 }

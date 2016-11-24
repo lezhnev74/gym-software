@@ -21,7 +21,7 @@ class TrainingSession
 
     function getDateRange()
     {
-        return $this->getDateRange();
+        return $this->date_range;
     }
 
 }

@@ -6,7 +6,9 @@
         stopOnError="true"
         strict="false"
         verbose="true"
+        bootstrap="tests/bootstrap.php"
 >
+
 
     <testsuites>
         <testsuite name="AllTests">
